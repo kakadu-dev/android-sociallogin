@@ -13,6 +13,5 @@
 
 <resources>
     <string name="app_name">SocialLogin</string>
-    <!--<string name="default_web_client_id" translatable="false">690327259798-pt4dhm7fju70cu7ra8nhmamdi67bg7pa.apps.googleusercontent.com</string>-->
     <string name="default_web_client_id" translatable="false">690327259798-lnra5t2l81mu2upv8nr5mvim5m4eg1sf.apps.googleusercontent.com</string>
 </resources>

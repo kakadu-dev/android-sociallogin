@@ -50,7 +50,7 @@ internal class VkModule(override val listener: ILoginListener) : ISocialModule {
     }
 
     override fun login(activity: Activity) {
-        VK.login(activity, arrayListOf(VKScope.WALL, VKScope.PHOTOS))
+        VK.login(activity, arrayListOf(VKScope.OFFLINE, VKScope.EMAIL))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {

@@ -27,7 +27,7 @@ internal class GoogleModule(override val listener: ILoginListener) : ISocialModu
     override fun login(activity: Activity) {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .apply {
-                val clientId = activity.getString(R.string.default_web_client_id)
+                val clientId = activity.getString(R.string.google_default_web_client_id)
                 if (clientId.isNotEmpty()) {
                     requestIdToken(clientId)
                 } else {

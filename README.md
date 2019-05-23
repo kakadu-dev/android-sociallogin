@@ -13,7 +13,7 @@ Easy login with Google, Facebook, VK for android apps
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result:LoginResult? = data?.loginResult
+        val result: LoginResult? = data?.loginResult
         // do something
     }
 ```
@@ -34,12 +34,12 @@ Easy login with Google, Facebook, VK for android apps
 
   <!--For Facebook (required)-->
   <string name="facebook_app_id">...</string>
- <string name="fb_login_protocol_scheme">...</string>
+  <string name="fb_login_protocol_scheme">...</string>
 
   <!--For VK (required)-->
   <integer name="com_vk_sdk_AppId">...</integer>
 
-  </resources>
+</resources>
 ```
 
 #### Add the dependency in your `build.gradle` file:
@@ -51,10 +51,10 @@ repositories {
   
 dependencies { 
 	// For all social networks 
-	implementation 'com.github.kakadu-dev:android-sociallogin:0.0.1'
+	implementation 'com.github.kakadu-dev:android-sociallogin:0.0.2'
 	
 	// or exclude some
-    implementation('com.github.kakadu-dev:android-sociallogin:0.0.1') {  
+    implementation('com.github.kakadu-dev:android-sociallogin:0.0.2') {
         exclude group: 'com.vk' //without VK  
         exclude group: 'com.facebook.android' //without Facebook  
         exclude group: 'com.google.android.gms' //without Google  
