@@ -51,10 +51,10 @@ repositories {
   
 dependencies { 
 	// For all social networks 
-	implementation 'com.github.kakadu-dev:android-sociallogin:0.0.2'
+	implementation 'com.github.kakadu-dev:android-sociallogin:1.0.3'
 	
 	// or exclude some
-    implementation('com.github.kakadu-dev:android-sociallogin:0.0.2') {
+    implementation('com.github.kakadu-dev:android-sociallogin:1.0.3') {
         exclude group: 'com.vk' //without VK  
         exclude group: 'com.facebook.android' //without Facebook  
         exclude group: 'com.google.android.gms' //without Google  

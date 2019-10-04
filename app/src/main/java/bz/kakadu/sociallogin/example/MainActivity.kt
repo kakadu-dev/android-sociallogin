@@ -18,7 +18,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import bz.kakadu.sociallogin.LoginResult
 import bz.kakadu.sociallogin.SocialLogin
 import bz.kakadu.sociallogin.loginResult
 
@@ -37,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result: LoginResult? = data?.loginResult
         when (requestCode) {
             REQUEST_LOGIN -> {
                 if (data != null) {
