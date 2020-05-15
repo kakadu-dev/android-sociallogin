@@ -18,6 +18,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.WorkerThread
 
 class SocialLogin : Activity(), ILoginListener {
     private lateinit var loginType: LoginType
@@ -26,10 +27,11 @@ class SocialLogin : Activity(), ILoginListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginType = intent.loginType!!
+        val permissions = intent.permissions!!
         socialModule = when (loginType) {
             LoginType.GOOGLE -> GoogleModule(this)
-            LoginType.FB -> FacebookModule(this)
-            LoginType.VK -> VkModule(this)
+            LoginType.FB -> FacebookModule(permissions, this)
+            LoginType.VK -> VkModule(permissions, this)
         }
         if (savedInstanceState == null) {
             socialModule.login(this)
@@ -58,10 +60,11 @@ class SocialLogin : Activity(), ILoginListener {
         /**
          * Get date from result intent: val result: SocialLogin.LoginResult? = data.loginResult
          */
-        fun loginIntent(context: Context, loginType: LoginType) =
+        fun loginIntent(context: Context, loginType: LoginType, vararg extraPermissions: String) =
             Intent(context, SocialLogin::class.java)
                 .also {
                     it.loginType = loginType
+                    it.permissions = extraPermissions
                 }
 
         /**
@@ -77,8 +80,21 @@ class SocialLogin : Activity(), ILoginListener {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
         }
+
+        @WorkerThread
+        fun getResultWithUserInfo(orig: LoginResult): LoginResult {
+            return when (orig.loginType) {
+                LoginType.GOOGLE -> orig
+                LoginType.FB -> FacebookModule.getWithUserInfo(orig)
+                LoginType.VK -> VkModule.getWithUserInfo(orig)
+                else -> {
+                    Log.w("SocialLogin", "Unsupported user info for ${orig.loginType}")
+                    orig
+                }
+            }
+        }
+
     }
 }
 
@@ -88,6 +104,13 @@ private var Intent.loginType: SocialLogin.LoginType?
     }
     get() = getIntExtra("loginType", -1)
         .takeIf { it != -1 }?.let { SocialLogin.LoginType.values()[it] }
+
+private var Intent.permissions: Array<out String>?
+    set(value) {
+        putExtra("permissions", value)
+    }
+    get() = getStringArrayExtra("permissions")
+
 var Intent.loginResult: LoginResult?
     set(value) {
         putExtra("loginResult", value)

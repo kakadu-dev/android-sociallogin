@@ -13,9 +13,27 @@ Easy login with Google, Facebook, VK for android apps
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result: LoginResult? = data?.loginResult
+        val loginResult: LoginResult? = data?.loginResult
         // do something
     }
+```
+
+#### Get user info:
+```kotlin
+    val withInfo = SocialLogin.getResultWithUserInfo(loginResult)
+    val avatar = withInfo.avatar
+    val email = withInfo.email
+    val firstName = withInfo.firstName
+    val lastName = withInfo.lastName
+```
+
+#### Request other permissions:
+```kotlin
+    // for VK
+    SocialLogin.loginIntent(this, LoginType.VK, VKScope.FRIENDS.name, VKScope.PHONE.name)
+    
+    // for Facebook
+    SocialLogin.loginIntent(this, LoginType.FB, "user_friends")
 ```
 
 ## Setup
@@ -51,10 +69,10 @@ repositories {
   
 dependencies { 
 	// For all social networks 
-	implementation 'com.github.kakadu-dev:android-sociallogin:1.0.3'
+	implementation 'com.github.kakadu-dev:android-sociallogin:1.1.4'
 	
 	// or exclude some
-    implementation('com.github.kakadu-dev:android-sociallogin:1.0.3') {
+    implementation('com.github.kakadu-dev:android-sociallogin:1.1.4') {
         exclude group: 'com.vk' //without VK  
         exclude group: 'com.facebook.android' //without Facebook  
         exclude group: 'com.google.android.gms' //without Google  
