@@ -32,6 +32,7 @@ class SocialLogin : Activity(), ILoginListener {
             LoginType.GOOGLE -> GoogleModule(this)
             LoginType.FB -> FacebookModule(permissions, this)
             LoginType.VK -> VkModule(permissions, this)
+            LoginType.HUAWEI -> HuaweiModule(this)
         }
         if (savedInstanceState == null) {
             socialModule.login(this)
@@ -53,7 +54,8 @@ class SocialLogin : Activity(), ILoginListener {
     enum class LoginType {
         GOOGLE,
         FB,
-        VK
+        VK,
+        HUAWEI
     }
 
     companion object {
@@ -75,6 +77,7 @@ class SocialLogin : Activity(), ILoginListener {
                 when (loginType) {
                     LoginType.FB -> FacebookModule.logout()
                     LoginType.GOOGLE -> GoogleModule.logout(context)
+                    LoginType.HUAWEI -> HuaweiModule.logout(context)
                     else -> Log.w("SocialLogin", "Unsupported logout for $loginType")
                 }
             } catch (e: Exception) {

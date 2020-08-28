@@ -42,6 +42,7 @@ Easy login with Google, Facebook, VK for android apps
 * [Google](https://developers.google.com/identity/sign-in/android/start-integrating)
 * [Facebook](https://developers.facebook.com/docs/android/getting-started/)
 * [VK](https://vk.com/dev/android_sdk)
+* [Huawei](https://developer.huawei.com/consumer/en/doc/HMSCore-Guides-V5/login-idtoken-0000001050050839-V5)
 
 #### Then add the received resources to your app:
 ```xml
@@ -69,10 +70,12 @@ repositories {
   
 dependencies { 
 	// For all social networks 
-	implementation 'com.github.kakadu-dev:android-sociallogin:1.1.4'
+	implementation 'com.github.kakadu-dev:android-sociallogin:1.2.5'
+    // also for Huawei
+    implementation 'com.huawei.hms:hwid:5.0.1.300'
 	
 	// or exclude some
-    implementation('com.github.kakadu-dev:android-sociallogin:1.1.4') {
+    implementation('com.github.kakadu-dev:android-sociallogin:1.2.5') {
         exclude group: 'com.vk' //without VK  
         exclude group: 'com.facebook.android' //without Facebook  
         exclude group: 'com.google.android.gms' //without Google  
