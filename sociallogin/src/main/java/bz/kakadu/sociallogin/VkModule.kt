@@ -20,6 +20,7 @@ import com.vk.api.sdk.VK
 import com.vk.api.sdk.auth.VKAccessToken
 import com.vk.api.sdk.auth.VKAuthCallback
 import com.vk.api.sdk.auth.VKScope
+import com.vk.api.sdk.exceptions.VKAuthException
 import com.vk.api.sdk.requests.VKRequest
 import org.json.JSONObject
 
@@ -41,8 +42,8 @@ internal class VkModule(
             )
         }
 
-        override fun onLoginFailed(errorCode: Int) {
-            if (errorCode == VKAuthCallback.AUTH_CANCELED) {
+        override fun onLoginFailed(authException: VKAuthException) {
+            if (authException.isCanceled) {
                 listener.onLoginResult(null)
             } else {
                 listener.onLoginResult(

@@ -28,8 +28,8 @@ internal class FacebookModule(
 ) : ISocialModule {
     private val fbCallbackManager = CallbackManager.Factory.create()
     private val fbCallback = object : FacebookCallback<LoginResult> {
-        override fun onSuccess(loginResult: LoginResult) {
-            handleFbLoginToken(loginResult.accessToken)
+        override fun onSuccess(result: LoginResult) {
+            handleFbLoginToken(result.accessToken)
         }
 
         override fun onCancel() {
@@ -93,7 +93,7 @@ internal class FacebookModule(
             val parameters = Bundle()
             parameters.putString("fields", "email,first_name,last_name,picture")
             req.parameters = parameters
-            val response = req.executeAndWait().jsonObject
+            val response = req.executeAndWait().jsonObject!!
             val email = response.optString("email").takeIf { it.isNotEmpty() }
             val firstName = response.optString("first_name").takeIf { it.isNotEmpty() }
             val lastName = response.optString("last_name").takeIf { it.isNotEmpty() }

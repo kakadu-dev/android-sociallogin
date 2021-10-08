@@ -7,7 +7,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 5
+        versionCode 6
         versionName "1.2.$versionCode-SNAPSHOT"
         archivesBaseName = "android-sociallogin"
     }
@@ -25,10 +25,11 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'com.google.android.gms:play-services-auth:18.1.0'
-    api 'com.facebook.android:facebook-login:7.1.0'
-    api 'com.vk:androidsdk:2.2.4'
-    compileOnly 'com.huawei.hms:hwid:5.0.1.300'
+    api 'com.google.android.gms:play-services-auth:19.2.0'
+    api 'com.facebook.android:facebook-login:12.0.0'
+    api 'com.vk:android-sdk-core:3.3.0'
+//    api 'android-sdk-api:3.3.0'
+    compileOnly 'com.huawei.hms:hwid:5.3.0.305'
 }
 
 
