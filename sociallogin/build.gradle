@@ -1,17 +1,23 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'maven-publish'
+}
 
 android {
-    compileSdkVersion 29
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
+    compileSdkVersion 31
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 6
-        versionName "1.2.$versionCode-SNAPSHOT"
-        archivesBaseName = "android-sociallogin"
+        targetSdkVersion 31
+        versionCode 7
+        versionName "1.2.$versionCode"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -21,19 +27,28 @@ android {
     androidExtensions {
         experimental = true
     }
+    buildFeatures {
+        buildConfig = false
+    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'com.google.android.gms:play-services-auth:19.2.0'
-    api 'com.facebook.android:facebook-login:12.0.0'
-    api 'com.vk:android-sdk-core:3.3.0'
-//    api 'android-sdk-api:3.3.0'
-    compileOnly 'com.huawei.hms:hwid:5.3.0.305'
+    api 'com.google.android.gms:play-services-auth:20.1.0'
+    api 'com.facebook.android:facebook-login:13.1.0'
+    api 'com.vk:android-sdk-core:3.5.2'
+    compileOnly 'com.huawei.hms:hwid:6.4.0.300'
 }
 
-
-// publish
-group = 'com.github.kakadu-dev'
-version = android.defaultConfig.versionName
-apply from: 'publish.gradle'
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.kakadu-dev'
+                artifactId = 'android-sociallogin'
+                version = android.defaultConfig.versionName + '-SNAPSHOT'
+            }
+        }
+    }
+}
