@@ -70,12 +70,12 @@ repositories {
   
 dependencies { 
 	// For all social networks 
-	implementation 'com.github.kakadu-dev:android-sociallogin:1.2.9'
+	implementation 'com.github.kakadu-dev:android-sociallogin:1.2.13'
     // also for Huawei
     implementation 'com.huawei.hms:hwid:6.4.0.300'
 	
 	// or exclude some
-    implementation('com.github.kakadu-dev:android-sociallogin:1.2.9') {
+    implementation('com.github.kakadu-dev:android-sociallogin:1.2.13') {
         exclude group: 'com.vk' //without VK  
         exclude group: 'com.facebook.android' //without Facebook  
         exclude group: 'com.google.android.gms' //without Google  
