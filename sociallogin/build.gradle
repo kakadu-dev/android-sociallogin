@@ -15,8 +15,6 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 7
-        versionName "1.2.$versionCode"
     }
     buildTypes {
         release {
@@ -33,7 +31,7 @@ android {
 }
 
 dependencies {
-    api 'com.google.android.gms:play-services-auth:20.1.0'
+    api 'com.google.android.gms:play-services-auth:20.2.0'
     api 'com.facebook.android:facebook-login:13.1.0'
     api 'com.vk:android-sdk-core:3.5.2'
     compileOnly 'com.huawei.hms:hwid:6.4.0.300'
@@ -47,7 +45,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.kakadu-dev'
                 artifactId = 'android-sociallogin'
-                version = android.defaultConfig.versionName + '-SNAPSHOT'
+                version = '1.2.8-SNAPSHOT'
             }
         }
     }
